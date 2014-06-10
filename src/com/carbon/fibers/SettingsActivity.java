@@ -44,6 +44,8 @@ import com.carbon.fibers.fragments.navbar.*;
 import com.carbon.fibers.fragments.pie.*;
 import com.carbon.fibers.fragments.sb.*;
 import com.carbon.fibers.fragments.ui.*;
+import com.carbon.fibers.fragments.batterysaver.*;
+import com.carbon.fibers.fragments.installer.*;
 
 public class SettingsActivity extends PreferenceActivity implements ButtonBarHandler {
 
@@ -198,7 +200,9 @@ public class SettingsActivity extends PreferenceActivity implements ButtonBarHan
 
     private static final String[] ENTRY_FRAGMENTS = {
         ButtonSettings.class.getName(),
+        CustomCarrier.class.getName(),
         InterfaceSettings.class.getName(),
+        InstallerSettingsFragment.class.getName(),
         KeyguardSettings.class.getName(),
         MoreDeviceSettings.class.getName(),
         PowerMenuFragment.class.getName(),
@@ -206,7 +210,7 @@ public class SettingsActivity extends PreferenceActivity implements ButtonBarHan
         SbSettings.class.getName(),
         QuickSettingsTiles.class.getName(),
         QuickSettingsTilesStyle.class.getName(),
-        CarrierLabel.class.getName(),
+        NotificationsShortcutFragment.class.getName(),
         NotificationDrawerStyle.class.getName(),
         NavbarTab.class.getName(),
         NavBarButtonStyle.class.getName(),
@@ -221,6 +225,9 @@ public class SettingsActivity extends PreferenceActivity implements ButtonBarHan
         PieTriggerSettings.class.getName(),
         PieTab.class.getName(),
         ProgressBar.class.getName(),
+        BatterySaverSettings.class.getName(),
+        BatterySaverHelper.class.getName(),
+        BatteryCpuSettings.class.getName(),
         RamBar.class.getName()
     };
 

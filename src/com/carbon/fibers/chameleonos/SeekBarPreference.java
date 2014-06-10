@@ -68,7 +68,7 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
         if (id > 0) {
             mUnitsLeft = getContext().getResources().getString(id);
         }
-        
+
         try {
             String newInterval = attrs.getAttributeValue(SETTINGS, "interval");
             if(newInterval != null)
@@ -100,7 +100,7 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
 
     @Override
     protected View onCreateView(ViewGroup parent){
-        
+
         RelativeLayout layout =  null;
         try {
             LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -119,7 +119,7 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
             // move our seekbar to the new view we've been given
             ViewParent oldContainer = mSeekBar.getParent();
             ViewGroup newContainer = (ViewGroup) view.findViewById(R.id.seekBarPrefBarContainer);
-            
+
             if (oldContainer != newContainer) {
                 // remove the seekbar from the old view
                 if (oldContainer != null) {

@@ -24,6 +24,7 @@ import static com.android.internal.util.cm.QSConstants.TILE_BLUETOOTH;
 import static com.android.internal.util.cm.QSConstants.TILE_BRIGHTNESS;
 import static com.android.internal.util.cm.QSConstants.TILE_CAMERA;
 import static com.android.internal.util.cm.QSConstants.TILE_CARBON;
+import static com.android.internal.util.cm.QSConstants.TILE_COMPASS;
 import static com.android.internal.util.cm.QSConstants.TILE_DELIMITER;
 import static com.android.internal.util.cm.QSConstants.TILE_EXP_DESKTOP;
 import static com.android.internal.util.cm.QSConstants.TILE_GPS;
@@ -35,6 +36,7 @@ import static com.android.internal.util.cm.QSConstants.TILE_NETWORKADB;
 import static com.android.internal.util.cm.QSConstants.TILE_NETWORKMODE;
 import static com.android.internal.util.cm.QSConstants.TILE_NFC;
 import static com.android.internal.util.cm.QSConstants.TILE_PROFILE;
+import static com.android.internal.util.cm.QSConstants.TILE_POWERMENU;
 import static com.android.internal.util.cm.QSConstants.TILE_PERFORMANCE_PROFILE;
 import static com.android.internal.util.cm.QSConstants.TILE_QUIETHOURS;
 import static com.android.internal.util.cm.QSConstants.TILE_RINGER;
@@ -48,7 +50,9 @@ import static com.android.internal.util.cm.QSConstants.TILE_USER;
 import static com.android.internal.util.cm.QSConstants.TILE_VOLUME;
 import static com.android.internal.util.cm.QSConstants.TILE_WIFI;
 import static com.android.internal.util.cm.QSConstants.TILE_WIFIAP;
+import static com.android.internal.util.cm.QSConstants.TILE_THEME;
 import static com.android.internal.util.cm.QSConstants.TILE_QUICKRECORD;
+import static com.android.internal.util.cm.QSConstants.TILE_BATTERYSAVER;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -95,6 +99,9 @@ public class QuickSettingsUtil {
                  TILE_CARBON, R.string.title_tile_carbon,
                 "com.android.systemui:drawable/ic_qs_carbon"));
         registerTile(new QuickSettingsUtil.TileInfo(
+                 TILE_COMPASS, R.string.title_tile_compass,
+                "com.android.systemui:drawable/ic_qs_compass_on"));
+        registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_SLEEP, R.string.title_tile_sleep,
                 "com.android.systemui:drawable/ic_qs_sleep"));
         registerTile(new QuickSettingsUtil.TileInfo(
@@ -121,6 +128,9 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_PROFILE, R.string.title_tile_profile,
                 "com.android.systemui:drawable/ic_qs_profiles"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_POWERMENU, R.string.title_tile_powermenu,
+                "com.android.systemui:drawable/ic_qs_powermenu"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_PERFORMANCE_PROFILE, R.string.title_tile_performance_profile,
                 "com.android.systemui:drawable/ic_qs_perf_profile"));
@@ -164,11 +174,17 @@ public class QuickSettingsUtil {
                 TILE_MUSIC, R.string.title_tile_music,
                 "com.android.systemui:drawable/ic_qs_media_pause"));
         registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_THEME, R.string.title_tile_theme,
+                "com.android.systemui:drawable/ic_qs_theme_manual"));
+        registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_SCREENSHOT, R.string.title_tile_screenshot,
                 "com.android.systemui:drawable/ic_qs_screenshot"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_QUICKRECORD, R.string.title_tile_quick_record,
                 "com.android.systemui:drawable/ic_qs_quickrecord"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_BATTERYSAVER, R.string.quick_settings_battery_saver_label,
+                "com.android.systemui:drawable/ic_qs_battery_saver_on"));
     }
 
     private static void registerTile(QuickSettingsUtil.TileInfo info) {
@@ -229,6 +245,11 @@ public class QuickSettingsUtil {
         // Don't show the performance profiles tile if is not available for the device
         if (!QSUtils.deviceSupportsPerformanceProfiles(context)) {
             removeTile(TILE_PERFORMANCE_PROFILE);
+        }
+
+        // Don't show the Compass tile if the device has no orientation sensor
+        if (!QSUtils.deviceSupportsCompass(context)) {
+            removeTile(TILE_COMPASS);
         }
     }
 
