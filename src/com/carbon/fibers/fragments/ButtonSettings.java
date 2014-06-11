@@ -93,12 +93,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
     private static final String TRACKBALL_WAKE_TOGGLE = "pref_trackball_wake_toggle";
 
-    private static final String CATEGORY_HOME = "home_key";
-    private static final String CATEGORY_MENU = "menu_key";
-    private static final String CATEGORY_ASSIST = "assist_key";
-    private static final String CATEGORY_APPSWITCH = "app_switch_key";
-    private static final String CATEGORY_VOLUME = "volume_keys";
-    private static final String CATEGORY_CAMERA = "camera_key";
     private static final int DLG_SHOW_WARNING_DIALOG = 0;
     private static final int DLG_SHOW_ACTION_DIALOG  = 1;
     private static final int DLG_RESET_TO_DEFAULT    = 2;
@@ -159,34 +153,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                     "shortcut_action_hwkey_values", "array", "com.android.settings")),
             res.getStringArray(res.getIdentifier(
                     "shortcut_action_hwkey_entries", "array", "com.android.settings")));
-
-        final int deviceKeys = getResources().getInteger(
-                com.android.internal.R.integer.config_deviceHardwareKeys);
-        final boolean hasHomeKey = (deviceKeys & KEY_MASK_HOME) != 0;
-        final boolean hasMenuKey = (deviceKeys & KEY_MASK_MENU) != 0;
-        final boolean hasAssistKey = (deviceKeys & KEY_MASK_ASSIST) != 0;
-        final boolean hasAppSwitchKey = (deviceKeys & KEY_MASK_APP_SWITCH) != 0;
-        final boolean hasCameraKey = (deviceKeys & KEY_MASK_CAMERA) != 0;
-
-        boolean hasAnyBindableKey = false;
-        final PreferenceCategory homeCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_HOME);
-        final PreferenceCategory menuCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_MENU);
-        final PreferenceCategory assistCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_ASSIST);
-        final PreferenceCategory appSwitchCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_APPSWITCH);
-        final PreferenceCategory cameraCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_CAMERA);
-        final PreferenceCategory volumeCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_VOLUME);
-  
-         //Trackball wake
-         mTrackballWake = (CheckBoxPreference) prefScreen.findPreference(TRACKBALL_WAKE_TOGGLE);
-         mTrackballWake.setChecked(Settings.System.getInt(resolver, Settings.System.TRACKBALL_WAKE_SCREEN, 1) == 1);
         // Attach final settings screen.
         reloadSettings();
+  
+         //Trackball wake
+         mTrackballWake = (CheckBoxPreference) getPreferenceScreen().findPreference(TRACKBALL_WAKE_TOGGLE);
+         mTrackballWake.setChecked(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.TRACKBALL_WAKE_SCREEN, 1) == 1);
 
         setHasOptionsMenu(true);
     }
